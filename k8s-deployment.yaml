@@ -5,7 +5,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -21,11 +21,11 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            cpu: "200m"
-            memory: "256Mi"
+            cpu: "300m"
+            memory: "384Mi"
           limits:
-            cpu: "500m"
-            memory: "512Mi"
+            cpu: "700m"
+            memory: "768Mi"
         readinessProbe:
           httpGet:
             path: /

@@ -16,10 +16,10 @@ This guide provides step-by-step instructions on how to deploy your React applic
 
 ```bash
 # Create a new project (optional)
-gcloud projects create YOUR_PROJECT_ID --name="Your Project Name"
+gcloud projects create final-sda-stalker --name="Your Project Name"
 
 # Set the active project
-gcloud config set project YOUR_PROJECT_ID
+gcloud config set project final-sda-stalker
 ```
 
 2. Enable the required APIs:
@@ -45,7 +45,7 @@ gcloud container clusters create react-app-cluster \
 
 ```bash
 # Build the image locally
-docker build -t gcr.io/YOUR_PROJECT_ID/react-frontend:v1 .
+docker build -t gcr.io/final-sda-stalker/frontend:latest .
 ```
 
 2. Configure Docker to use Google Container Registry:
@@ -57,7 +57,7 @@ gcloud auth configure-docker
 3. Push the image to Google Container Registry:
 
 ```bash
-docker push gcr.io/YOUR_PROJECT_ID/react-frontend:v1
+docker push gcr.io/final-sda-stalker/frontend:latest
 ```
 
 ## Step 4: Update Kubernetes Configuration Files
@@ -66,7 +66,7 @@ docker push gcr.io/YOUR_PROJECT_ID/react-frontend:v1
 
 ```yaml
 # Update the image line in k8s-deployment.yaml
-image: gcr.io/YOUR_PROJECT_ID/react-frontend:v1
+image: gcr.io/final-sda-stalker/frontend:latest
 ```
 
 ## Step 5: Deploy to GKE
@@ -129,8 +129,8 @@ kubectl logs POD_NAME
 2. Describe the services and deployments:
 
 ```bash
-kubectl describe service react-frontend-service
-kubectl describe deployment react-frontend
+kubectl describe service frontend-service
+kubectl describe deployment frontend-deployment
 ```
 
 ## Scaling the Application
@@ -138,7 +138,7 @@ kubectl describe deployment react-frontend
 To scale the number of frontend replicas:
 
 ```bash
-kubectl scale deployment react-frontend --replicas=3
+kubectl scale deployment frontend-deployment --replicas=3
 ```
 
 ## Updating the Application
@@ -148,14 +148,14 @@ To update your application with a new version:
 1. Build and push a new version of the Docker image:
 
 ```bash
-docker build -t gcr.io/YOUR_PROJECT_ID/react-frontend:v2 .
-docker push gcr.io/YOUR_PROJECT_ID/react-frontend:v2
+docker build -t gcr.io/final-sda-stalker/frontend:v2 .
+docker push gcr.io/final-sda-stalker/frontend:v2
 ```
 
 2. Update the deployment to use the new image:
 
 ```bash
-kubectl set image deployment/react-frontend react-frontend=gcr.io/YOUR_PROJECT_ID/react-frontend:v2
+kubectl set image deployment/frontend-deployment frontend=gcr.io/final-sda-stalker/frontend:v2
 ```
 
 ## Cleaning Up
@@ -164,10 +164,10 @@ To avoid incurring charges, delete the resources when they're no longer needed:
 
 ```bash
 # Delete the service
-kubectl delete service react-frontend-service
+kubectl delete service frontend-service
 
 # Delete the deployment
-kubectl delete deployment react-frontend
+kubectl delete deployment frontend-deployment
 
 # Delete the GKE cluster
 gcloud container clusters delete react-app-cluster --zone us-central1-a
