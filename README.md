@@ -34,7 +34,7 @@ Create a Kubernetes cluster in Google Kubernetes Engine:
 
 ```bash
 gcloud container clusters create react-app-cluster \
-  --zone us-central1-a \
+  --zone asia-southeast1-a \
   --num-nodes=2 \
   --machine-type=e2-medium
 ```
@@ -74,7 +74,7 @@ image: gcr.io/final-sda-stalker/frontend:latest
 1. Get authentication credentials for the cluster:
 
 ```bash
-gcloud container clusters get-credentials react-app-cluster --zone us-central1-a
+gcloud container clusters get-credentials react-app-cluster --zone asia-southeast1-a
 ```
 
 2. Apply the Kubernetes configuration files:
@@ -170,6 +170,6 @@ kubectl delete service frontend-service
 kubectl delete deployment frontend-deployment
 
 # Delete the GKE cluster
-gcloud container clusters delete react-app-cluster --zone us-central1-a
+gcloud container clusters delete react-app-cluster --zone asia-southeast1-a
 ```
 
