@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/final-sda-stalke/frontend:latest  # Replace PROJECT_ID with your GCP project ID
+        image: gcr.io/final-sda-stalker/frontend:latest  # Replace PROJECT_ID with your GCP project ID
         ports:
         - containerPort: 80
         resources:
